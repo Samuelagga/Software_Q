@@ -12,7 +12,9 @@ import unittest
 import os
 from hotel import Hotel
 
+
 # In[2]:
+
 class TestHotel(unittest.TestCase):
     """
     Test case for the Hotel class.
@@ -46,8 +48,8 @@ class TestHotel(unittest.TestCase):
         """
         # Modify hotel information
         self.hotel.modify_info(new_name="Modified Hotel",
-        new_location="Modified Location",
-        new_rating=5)
+                               new_location="Modified Location",
+                               new_rating=5)
         self.assertEqual(self.hotel.name, "Modified Hotel")
         self.assertEqual(self.hotel.location, "Modified Location")
         self.assertEqual(self.hotel.rating, 5)
@@ -84,6 +86,10 @@ class TestHotel(unittest.TestCase):
 
         self.hotel.cancel_reservation(reservation_to_cancel)
         self.assertEqual(len(self.hotel.reservations), 0)
+        # Try to cancel not found reservation
+        self.hotel.cancel_reservation(reservation_to_cancel)
+        self.assertEqual(len(self.hotel.reservations), 0)
+
     def test_delete_hotel(self):
         """
         Test deleting a hotel.
@@ -96,6 +102,7 @@ class TestHotel(unittest.TestCase):
 
         # Check if hotel file was deleted
         self.assertFalse(os.path.exists(self.hotel.filename))
+
 
 if __name__ == '__main__':
     unittest.main()

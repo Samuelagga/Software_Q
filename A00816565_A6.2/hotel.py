@@ -13,9 +13,14 @@ reservations.
 import json
 import os
 
+
 # In[2]:
 
 class Hotel:
+    """
+    Class Hotel which contains the functions to create, delete,
+    modify info as well as making and canceling reservations.
+    """
     def __init__(self, name, location, rating):
         """
         Function to initialize hotel data.
@@ -66,7 +71,11 @@ class Hotel:
         """
         Shows the hotel information.
         """
-        return f"Hotel: {self.name}, Location: {self.location}, Rating: {self.rating}"
+        return (
+            f"Hotel: {self.name}, "
+            f"Location: {self.location}, "
+            f"Rating: {self.rating}"
+        )
 
     def modify_info(self, new_name=None, new_location=None, new_rating=None):
         """
@@ -86,7 +95,8 @@ class Hotel:
         Function to make a reservation.
         """
         if self.rooms:
-            room_number = self.rooms.pop(0)  # Automatically assign the lowest available room
+            # Automatically assign the lowest available room
+            room_number = self.rooms.pop(0)
             self.reservations.append(room_number)
             print(f"Reservation made for {room_number}.")
             self.save_file()  # Update file after making reservation
@@ -104,5 +114,4 @@ class Hotel:
             self.save_file()  # Update file after canceling a reservation
         else:
             print("Reservation not found.")
-    
 # In[3]:
